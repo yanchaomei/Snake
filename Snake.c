@@ -8,20 +8,20 @@
 #define Width 22
 char mainboard[Height][Width]; // 背景板
 char snake[2][100];
-int x_1,y2;
+int x1,y1;
 
 
-// 利用随机函数产生一个食物，坐标为x_1 y2 然后在背景坐标中标识$
+// 利用随机函数产生一个食物，坐标为x1 y1 然后在背景坐标中标识$
 void generate_food(){
 
     srand(time(0));
     do
     {
-        x_1=rand()%Width-2+1;
-        y2=rand()%Height-2+1;
+        x1=rand()%Width-2+1;
+        y1=rand()%Height-2+1;
     }
-    while(mainboard[x_1][y2]!=' ');
-    mainboard[x_1][y2]='$';
+    while(mainboard[x1][y1]!=' ');
+    mainboard[x1][y1]='$';
 }
 
 // 背景板部分 把四周用#围起来，然后调用generate_food函数来产生一个食物
@@ -150,9 +150,9 @@ void snake_move(){
             printf("\tGame over!\n");
             break;
         }
-        // 头部撞到了自己的身体，也就是头部前进遇到的那个字符不是' ' 也不是食物 x_1 y2 为食物坐标
+        // 头部撞到了自己的身体，也就是头部前进遇到的那个字符不是' ' 也不是食物 x1 y1 为食物坐标
         if(mainboard[x][y] == '*'){
-            if((x==x_1 && y==y2)){
+            if((x==x1 && y==y1)){
                 ;
             }else{
             printf("\tGame over!\n");
@@ -161,7 +161,7 @@ void snake_move(){
         
         }
         // 吃到食物
-        if(x == x_1 && y == y2){
+        if(x == x1 && y == y1){
             length++;
             score=score+100;
             // 如果长度到了8 进入下一阶段游戏，也就是过关了 此时游戏速度加快
